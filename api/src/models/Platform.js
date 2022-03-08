@@ -1,17 +1,22 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define(
-    "genre",
+    "platform",
     {
       id: {
         primaryKey: true,
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+      },
+      image_background: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
-    { timestamps: false }
+    {
+      timestamps: false,
+    }
   );
 };
