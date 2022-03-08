@@ -10,7 +10,7 @@ const videogame = require("./videogame");
 const videogames = require("./videogames");
 const genre = require("./genre");
 const platform = require("./platform");
-//router.use("/videgame", videogame);
+router.use("/videgame", videogame);
 //router.use("/videogames", videogames);
 //router.use("/genre", genre);
 router.use("/platforms", platform);
