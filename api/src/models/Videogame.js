@@ -8,8 +8,9 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        allowNull: false,
+        //allowNull: false,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
@@ -24,6 +25,10 @@ module.exports = (sequelize) => {
       },
       rating: {
         type: DataTypes.FLOAT,
+      },
+      background_image: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     { timestamps: false }
