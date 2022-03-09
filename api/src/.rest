@@ -1,1 +1,16 @@
 GET http://localhost:3001/platforms HTTP/1.1
+###
+GET http://localhost:3001/genre HTTP/1.1
+###
+POST http://localhost:3001/videogame HTTP/1.1
+content-type: application/json
+
+{
+    "name":"tetris2",
+    "description":"test",
+    "released":"01/10/1992",
+    "rating":4.5,
+    "idPlatforms":"PC",
+    "idGenres": [1,2,3],
+    "background_image":"https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg"
+}

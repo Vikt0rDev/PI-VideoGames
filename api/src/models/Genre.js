@@ -5,11 +5,16 @@ module.exports = (sequelize) => {
     {
       id: {
         primaryKey: true,
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      image_background: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     { timestamps: false }
