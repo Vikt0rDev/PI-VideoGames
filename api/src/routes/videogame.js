@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
     description,
     released,
     rating,
-    idPlatforms,
+    idPlatforms, //[1,2,3]
     idGenres, //[1,2,3,5]
     background_image,
   } = req.body;
@@ -19,9 +19,24 @@ router.post("/", async (req, res) => {
       rating,
       background_image,
     }).then((result) => {
-      console.log(result.dataValues.id);
-      return res.json(result.addGenre(idGenres));
+      //console.log(result.dataValues.id);
+      //generos
+      //1 action
+      //2 rpg
+      //videosgames_genr
+      //idjuegos  id de generos
+      //  1           2
+      //  1           1
+      //  1           3
+      //videos
+      //1 tibia
+      //return res.json(result.addGenre(idGenres));
+      result.addGenre(idGenres);
+      return res.json(result.addPlatform(idPlatforms));
     });
+    /* .then((result) => {
+        return res.json(result.addPlatform(idPlatforms));
+      }) */
   } catch (error) {
     console.log("ALGO FALLO EN EL POST", error);
   }
