@@ -4,8 +4,10 @@ const axios = require("axios");
 const { Genre } = require("../db");
 const { API_KEY } = process.env;
 
-router.get("/", (req, res) => {
-  try {
+router.get("/", async (req, res) => {
+  const checkGenere = await Genre.findOne({ where: { id: 1 } });
+  if (checkGenere === null) {
+    //cuando la base de datos esta vacia
     axios
       .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
       .then((response) => {
@@ -17,15 +19,14 @@ router.get("/", (req, res) => {
           };
         });
         //response.data.next PENDIENTE DE REVISAR LA PROPIEDAD NEXT QUE TIENE UNA SEGUNDA PAGINA
-
         Genre.bulkCreate(genres).then((result) => {
           return res.status(200).json(result);
         });
-
-        //return res.status(200).json(platforms);
       });
-  } catch (error) {
-    error;
+  } else {
+    //buscar en la base de datos
+    const genre = await Genre.findAll();
+    res.json(genre);
   }
 });
 module.exports = router;
