@@ -8,6 +8,10 @@ router.get("/", async (req, res) => {
   const checkGenere = await Genre.findOne({ where: { id: 1 } });
   if (checkGenere === null) {
     //cuando la base de datos esta vacia
+
+router.get("/", (req, res) => {
+  try {
+
     axios
       .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
       .then((response) => {
@@ -19,6 +23,7 @@ router.get("/", async (req, res) => {
           };
         });
         //response.data.next PENDIENTE DE REVISAR LA PROPIEDAD NEXT QUE TIENE UNA SEGUNDA PAGINA
+
         Genre.bulkCreate(genres).then((result) => {
           return res.status(200).json(result);
         });
@@ -27,6 +32,17 @@ router.get("/", async (req, res) => {
     //buscar en la base de datos
     const genre = await Genre.findAll();
     res.json(genre);
+
+
+        Genre.bulkCreate(genres).then((result) => {
+          return res.status(200).json(result);
+        });
+
+        //return res.status(200).json(platforms);
+      });
+  } catch (error) {
+    error;
+
   }
 });
 module.exports = router;

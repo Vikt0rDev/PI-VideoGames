@@ -4,6 +4,7 @@ const axios = require("axios");
 const { Platform } = require("../db");
 const { API_KEY } = process.env;
 
+
 router.get("/", async (req, res) => {
   let data = {
     url: `https://api.rawg.io/api/platforms?key=${API_KEY}`,
@@ -11,6 +12,10 @@ router.get("/", async (req, res) => {
   };
 
   function getData(url, platforms = []) {
+
+router.get("/", (req, res) => {
+  /* function getData(url, platforms = []) {
+
     //https://api.rawg.io/api/platforms
     try {
       axios.get(url).then((response) => {
@@ -35,6 +40,7 @@ router.get("/", async (req, res) => {
       console.log(error);
     }
   }
+
   console.log(getData(`https://api.rawg.io/api/platforms?key=${API_KEY}`));
   res.send();
   /*   return getData(`https://api.rawg.io/api/platforms?key=${API_KEY}`).then(
@@ -49,6 +55,14 @@ router.get("/", async (req, res) => {
 
   /*   const checkPlatforms = await Platform.findOne({ where: { id: 1 } });
   if (checkPlatforms === null) {
+
+  //console.log(getData(`https://api.rawg.io/api/platforms?key=${API_KEY}`));
+  return res
+    .status(200)
+    .json(getData(`https://api.rawg.io/api/platforms?key=${API_KEY}`)); */
+
+  try {
+
     axios
       .get(`https://api.rawg.io/api/platforms?key=${API_KEY}`)
       .then((response) => {
@@ -64,6 +78,12 @@ router.get("/", async (req, res) => {
         Platform.bulkCreate(platforms).then((result) => {
           return res.status(200).json(result);
         });
+
+        Platform.bulkCreate(platforms).then((result) => {
+          return res.status(200).json(result);
+        });
+
+        //return res.status(200).json(platforms);
       });
   } else {
     const platforms = await Platform.findAll();
